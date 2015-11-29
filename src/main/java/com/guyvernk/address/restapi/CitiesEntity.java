@@ -1,6 +1,6 @@
 package com.guyvernk.address.restapi;
 
-import org.springframework.context.annotation.Primary;
+
 
 import javax.persistence.*;
 
