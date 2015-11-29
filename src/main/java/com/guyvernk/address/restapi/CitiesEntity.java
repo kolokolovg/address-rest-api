@@ -114,4 +114,13 @@ public class CitiesEntity {
         result = 31 * result + (regionRu != null ? regionRu.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "CitiesEntity{" +
+                "titleRu='" + titleRu + '\'' +
+                ", areaRu='" + areaRu + '\'' +
+                ", regionRu='" + regionRu + '\'' +
+                '}';
+    }
 }

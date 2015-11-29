@@ -6,5 +6,7 @@ import java.util.List;
 
 public interface CityRepository extends JpaRepository<CitiesEntity,Integer> {
     List<CitiesEntity> findByTitleRu(String titleRu);
+    List<CitiesEntity> findByTitleRuContaining(String titleRu);
+
 
 }
