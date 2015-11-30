@@ -1,8 +1,12 @@
 package com.guyvernk.address.restapi;
 
 import javax.persistence.*;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 @Entity
+@Cache(usage=CacheConcurrencyStrategy.READ_ONLY,
+        region="yourEntityCache")
 @Table(name = "_regions", schema = "geodata")
 public class RegionsEntity {
     private int regionId;
