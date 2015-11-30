@@ -5,29 +5,50 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.concurrent.Callable;
+
 @RestController
 @RequestMapping(value = "/city")
 public class CityController {
-//    final Logger logger = LoggerFactory.getLogger(CityController.class);
+    //    final Logger logger = LoggerFactory.getLogger(CityController.class);
     @Autowired
     private CitiesService citiesData;
 
     @RequestMapping(value = "/find/{name}", method = RequestMethod.GET)
     @ResponseBody
-    public Cities findByName(@PathVariable String name){
-    return new Cities(citiesData.findByName(name));
+    public Callable <Cities> findByName(@PathVariable final String name) {
+        return new Callable<Cities>() {
+            @Override
+            public Cities call() throws Exception {
+                return new Cities(citiesData.findByName(name));
+            }
+        };
     }
+
     @RequestMapping(value = "/find/{name}/{size}", method = RequestMethod.GET)
     @ResponseBody
-    public Cities findByNameLimited(@PathVariable String name,@PathVariable int size){
-        if (size>15){
-            return new Cities(citiesData.findByNameLimited(name, 15));
-        } else
-        return new Cities(citiesData.findByNameLimited(name, size));
+    public Callable<Cities> findByNameLimited(@PathVariable final String name,
+                                              @PathVariable final int size) {
+        return new Callable<Cities>() {
+            @Override
+            public Cities call() throws Exception {
+                if (size > 15) {
+                    return new Cities(citiesData.findByNameLimited(name, 15));
+                } else
+                    return new Cities(citiesData.findByNameLimited(name, size));
+            }
+        };
+
     }
-    @RequestMapping(value = "/{id}",method = RequestMethod.GET)
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public CitiesEntity findById(@PathVariable int id){
-        return citiesData.findById(id);
+    public Callable<CitiesEntity> findById(@PathVariable final int id) {
+        return new Callable<CitiesEntity>() {
+            @Override
+            public CitiesEntity call() throws Exception {
+                return citiesData.findById(id);
+            }
+        };
     }
 }

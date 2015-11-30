@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.concurrent.Callable;
+
 @RestController
 @RequestMapping(value = "/country")
 public class CountryController {
@@ -18,7 +20,12 @@ public class CountryController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public CountriesEntity findById(@PathVariable int id){
-        return countryData.findById(id);
+    public Callable<CountriesEntity> findById(@PathVariable final int id){
+        return new Callable<CountriesEntity>() {
+            @Override
+            public CountriesEntity call() throws Exception {
+                return countryData.findById(id);
+            }
+        };
     }
 }
