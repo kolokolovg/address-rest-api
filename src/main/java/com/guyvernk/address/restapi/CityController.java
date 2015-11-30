@@ -20,6 +20,9 @@ public class CityController {
     @RequestMapping(value = "/find/{name}/{size}", method = RequestMethod.GET)
     @ResponseBody
     public Cities findByNameLimited(@PathVariable String name,@PathVariable int size){
+        if (size>15){
+            return new Cities(citiesData.findByNameLimited(name, 15));
+        } else
         return new Cities(citiesData.findByNameLimited(name, size));
     }
     @RequestMapping(value = "/{id}",method = RequestMethod.GET)
