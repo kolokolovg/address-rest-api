@@ -21,6 +21,6 @@ public class CitiesServiceImpl implements CitiesService{
 
     @Transactional(readOnly = true)
     public List<CitiesEntity> findByName(String titleRu) {
-        return cityRepository.findByTitleRuContaining(titleRu);
+        return cityRepository.findFirst5ByTitleRuContaining(titleRu);
     }
 }
