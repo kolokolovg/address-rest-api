@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping(value = "/city")
 public class CityController {
-    final Logger logger = LoggerFactory.getLogger(CityController.class);
+//    final Logger logger = LoggerFactory.getLogger(CityController.class);
     @Autowired
     private CitiesService citiesData;
 
@@ -21,5 +21,10 @@ public class CityController {
     @ResponseBody
     public Cities findByNameLimited(@PathVariable String name,@PathVariable int size){
         return new Cities(citiesData.findByNameLimited(name, size));
+    }
+    @RequestMapping(value = "/{id}",method = RequestMethod.GET)
+    @ResponseBody
+    public CitiesEntity findById(@PathVariable int id){
+        return citiesData.findById(id);
     }
 }

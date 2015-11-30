@@ -15,6 +15,11 @@ public class CitiesServiceImpl implements CitiesService{
     @Autowired
     private CityRepository cityRepository;
 
+    @Override
+    public CitiesEntity findById(int id) {
+        return cityRepository.findByCityId(id);
+    }
+
     @Transactional(readOnly = true)
     public List<CitiesEntity>findByTitleRu(String titleRu) {
         return  cityRepository.findByTitleRu(titleRu);
