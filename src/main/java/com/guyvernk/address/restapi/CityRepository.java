@@ -11,9 +11,7 @@ public interface CityRepository extends JpaRepository<CitiesEntity,Integer> {
     List<CitiesEntity> findByTitleRuContaining(String titleRu);
     List<CitiesEntity> findFirst5ByTitleRuContaining(String titleRu);
 
- /*   @Query("select * from _cities c where c.titleRU like %:name% limit ?:limit")
-    List<CitiesEntity> findByNameLimited(@Param("name") String name,
-                                         @Param("limit") Integer limit);
-*/
+   @Query(value ="select * from _cities where title_ru like %?1% limit ?2", nativeQuery = true)
+    List<CitiesEntity> findByNameLimited(String name,int limit);
 
 }

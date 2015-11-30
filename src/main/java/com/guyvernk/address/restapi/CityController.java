@@ -17,4 +17,9 @@ public class CityController {
     public Cities findByName(@PathVariable String name){
     return new Cities(citiesData.findByName(name));
     }
+    @RequestMapping(value = "/find/{name}/{size}", method = RequestMethod.GET)
+    @ResponseBody
+    public Cities findByNameLimited(@PathVariable String name,@PathVariable int size){
+        return new Cities(citiesData.findByNameLimited(name, size));
+    }
 }

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service("citiesData")
@@ -22,5 +23,10 @@ public class CitiesServiceImpl implements CitiesService{
     @Transactional(readOnly = true)
     public List<CitiesEntity> findByName(String titleRu) {
         return cityRepository.findFirst5ByTitleRuContaining(titleRu);
+    }
+
+    @Transactional(readOnly = true)
+    public List<CitiesEntity> findByNameLimited(String titleRU, int size) {
+        return cityRepository.findByNameLimited(titleRU,size);
     }
 }
