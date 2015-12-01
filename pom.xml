@@ -6,7 +6,7 @@
 
     <groupId>com.guyvernk</groupId>
     <artifactId>address-rest-api</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0-fixed</version>
 
     <dependencyManagement>
         <dependencies>
