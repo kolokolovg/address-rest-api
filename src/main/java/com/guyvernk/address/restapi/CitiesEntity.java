@@ -1,17 +1,15 @@
 package com.guyvernk.address.restapi;
-
-
-
-
-
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.search.annotations.*;
+import org.hibernate.search.annotations.Index;
 
 import javax.persistence.*;
 
 @Entity
-@Cache(usage=CacheConcurrencyStrategy.READ_ONLY,
-        region="yourEntityCache")
+@Cache(usage=CacheConcurrencyStrategy.READ_ONLY, region="yourEntityCache")
+@Indexed
+@Analyzer(impl = org.apache.lucene.analysis.standard.StandardAnalyzer.class)
 @Table(name = "_cities", schema = "geodata")
 //@NamedQuery(name = "CitiesEntity.findByNameLimited",
 //        query = "select * from _cities c where c.titleRU like %?1% limit ?2")
@@ -65,6 +63,7 @@ public class CitiesEntity {
     }
 
     @Basic
+    @Field(index = Index.YES, analyze = Analyze.YES, store = Store.YES)
     @Column(name = "title_ru")
     public String getTitleRu() {
         return titleRu;
@@ -75,6 +74,7 @@ public class CitiesEntity {
     }
 
     @Basic
+    @Field(index = Index.YES, analyze = Analyze.YES, store = Store.YES)
     @Column(name = "area_ru")
     public String getAreaRu() {
         return areaRu;
@@ -85,6 +85,7 @@ public class CitiesEntity {
     }
 
     @Basic
+    @Field(index = Index.YES, analyze = Analyze.YES, store = Store.YES)
     @Column(name = "region_ru")
     public String getRegionRu() {
         return regionRu;
