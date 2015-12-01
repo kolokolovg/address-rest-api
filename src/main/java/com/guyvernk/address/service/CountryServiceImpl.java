@@ -1,6 +1,7 @@
-package com.guyvernk.address.restapi;
+package com.guyvernk.address.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.guyvernk.address.model.CountriesEntity;
+import com.guyvernk.address.service.CountryService;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -8,12 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Service("countryData")
 @Repository
 @Transactional
-public class CountryServiceImpl implements CountryService{
-    @Autowired
-    CountryRepository countryRepository;
-
+public class CountryServiceImpl implements CountryService {
     @Transactional(readOnly = true)
     public CountriesEntity findById(int id) {
-        return countryRepository.findByCountryId(id);
+        return null;
     }
 }

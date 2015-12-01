@@ -1,4 +1,4 @@
-package com.guyvernk.address.restapi;
+package com.guyvernk.address.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -1,15 +1,15 @@
-package com.guyvernk.address.restapi;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.search.annotations.*;
+package com.guyvernk.address.model;
+
+import org.hibernate.search.annotations.Analyze;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.Store;
 import org.hibernate.search.annotations.Index;
 
 import javax.persistence.*;
 
-@Entity
-@Cache(usage=CacheConcurrencyStrategy.READ_ONLY, region="yourEntityCache")
 @Indexed
-@Analyzer(impl = org.apache.lucene.analysis.standard.StandardAnalyzer.class)
+@Entity
 @Table(name = "_cities", schema = "geodata")
 //@NamedQuery(name = "CitiesEntity.findByNameLimited",
 //        query = "select * from _cities c where c.titleRU like %?1% limit ?2")
@@ -63,7 +63,7 @@ public class CitiesEntity {
     }
 
     @Basic
-    @Field(index = Index.YES, analyze = Analyze.YES, store = Store.YES)
+    @Field(name = "title",index=Index.YES, analyze= Analyze.YES, store= Store.YES)
     @Column(name = "title_ru")
     public String getTitleRu() {
         return titleRu;
@@ -74,7 +74,7 @@ public class CitiesEntity {
     }
 
     @Basic
-    @Field(index = Index.YES, analyze = Analyze.YES, store = Store.YES)
+    @Field(name="area",index=Index.YES, analyze= Analyze.YES, store= Store.YES)
     @Column(name = "area_ru")
     public String getAreaRu() {
         return areaRu;
@@ -85,7 +85,7 @@ public class CitiesEntity {
     }
 
     @Basic
-    @Field(index = Index.YES, analyze = Analyze.YES, store = Store.YES)
+    @Field(name = "region", index=Index.YES, analyze= Analyze.YES, store= Store.YES)
     @Column(name = "region_ru")
     public String getRegionRu() {
         return regionRu;

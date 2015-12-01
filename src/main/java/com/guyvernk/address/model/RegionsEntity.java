@@ -1,18 +1,27 @@
-package com.guyvernk.address.restapi;
+package com.guyvernk.address.model;
 
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.Cache;
 import javax.persistence.*;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 @Entity
-@Cache(usage= CacheConcurrencyStrategy.READ_ONLY,
-        region="yourEntityCache")
-@Table(name = "_countries", schema = "geodata")
-public class CountriesEntity {
+@Table(name = "_regions", schema = "geodata")
+public class RegionsEntity {
+    private int regionId;
     private int countryId;
     private String titleRu;
 
     @Id
+    @Column(name = "region_id")
+    public int getRegionId() {
+        return regionId;
+    }
+
+    public void setRegionId(int regionId) {
+        this.regionId = regionId;
+    }
+
+    @Basic
     @Column(name = "country_id")
     public int getCountryId() {
         return countryId;
@@ -37,8 +46,9 @@ public class CountriesEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        CountriesEntity that = (CountriesEntity) o;
+        RegionsEntity that = (RegionsEntity) o;
 
+        if (regionId != that.regionId) return false;
         if (countryId != that.countryId) return false;
         if (titleRu != null ? !titleRu.equals(that.titleRu) : that.titleRu != null) return false;
 
@@ -47,7 +57,8 @@ public class CountriesEntity {
 
     @Override
     public int hashCode() {
-        int result = countryId;
+        int result = regionId;
+        result = 31 * result + countryId;
         result = 31 * result + (titleRu != null ? titleRu.hashCode() : 0);
         return result;
     }

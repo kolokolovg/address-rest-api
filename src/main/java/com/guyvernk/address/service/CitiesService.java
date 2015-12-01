@@ -1,4 +1,6 @@
-package com.guyvernk.address.restapi;
+package com.guyvernk.address.service;
+
+import com.guyvernk.address.model.CitiesEntity;
 
 import java.util.List;
 
