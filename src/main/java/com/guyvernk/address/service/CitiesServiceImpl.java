@@ -38,8 +38,9 @@ public class CitiesServiceImpl implements CitiesService {
         org.apache.lucene.search.Query query=
                 queryBuilder
                 .keyword()
-                .onFields("title")
-                .matching(titleRu)
+                .wildcard()
+                .onField("title")
+                .matching(titleRu+"*")
                 .createQuery();
         org.hibernate.search.jpa.FullTextQuery jpaQuery =
                 fullTextEntityManager.createFullTextQuery(query,CitiesEntity.class);

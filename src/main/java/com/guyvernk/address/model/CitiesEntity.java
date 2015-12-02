@@ -1,13 +1,29 @@
 package com.guyvernk.address.model;
 
+import org.apache.solr.analysis.LowerCaseFilterFactory;
+import org.apache.solr.analysis.StandardFilterFactory;
+import org.apache.solr.analysis.StandardTokenizerFactory;
+import org.apache.solr.analysis.StopFilterFactory;
 import org.hibernate.search.annotations.Analyze;
+import org.hibernate.search.annotations.Analyzer;
+import org.hibernate.search.annotations.AnalyzerDef;
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Indexed;
 import org.hibernate.search.annotations.Store;
+import org.hibernate.search.annotations.Parameter;
 import org.hibernate.search.annotations.Index;
+import org.hibernate.search.annotations.TokenFilterDef;
+import org.hibernate.search.annotations.TokenizerDef;
 
 import javax.persistence.*;
 
+@AnalyzerDef(name = "searchtokenanalyzer",tokenizer = @TokenizerDef(factory = StandardTokenizerFactory.class),
+        filters = {
+                @TokenFilterDef(factory = StandardFilterFactory.class),
+                @TokenFilterDef(factory = LowerCaseFilterFactory.class),
+                @TokenFilterDef(factory = StopFilterFactory.class,params = {
+                        @Parameter(name = "ignoreCase", value = "true") }) })
+@Analyzer(definition = "searchtokenanalyzer")
 @Indexed
 @Entity
 @Table(name = "_cities", schema = "geodata")
@@ -63,7 +79,7 @@ public class CitiesEntity {
     }
 
     @Basic
-    @Field(name = "title",index=Index.YES, analyze= Analyze.YES, store= Store.YES)
+    @Field(name = "title",index=Index.YES, analyze= Analyze.YES, store= Store.NO)
     @Column(name = "title_ru")
     public String getTitleRu() {
         return titleRu;
@@ -74,7 +90,7 @@ public class CitiesEntity {
     }
 
     @Basic
-    @Field(name="area",index=Index.YES, analyze= Analyze.YES, store= Store.YES)
+    @Field(name="area",index=Index.YES, analyze= Analyze.YES, store= Store.NO)
     @Column(name = "area_ru")
     public String getAreaRu() {
         return areaRu;
@@ -85,7 +101,7 @@ public class CitiesEntity {
     }
 
     @Basic
-    @Field(name = "region", index=Index.YES, analyze= Analyze.YES, store= Store.YES)
+    @Field(name = "region", index=Index.YES, analyze= Analyze.YES, store= Store.NO)
     @Column(name = "region_ru")
     public String getRegionRu() {
         return regionRu;

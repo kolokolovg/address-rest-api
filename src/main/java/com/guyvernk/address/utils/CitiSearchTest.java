@@ -14,12 +14,12 @@ public class CitiSearchTest {
         ctx.refresh();
 
         CitiesService citiesService = ctx.getBean("citiesData",CitiesService.class);
-        List<CitiesEntity> res = citiesService.findByTitleRu("москва");
+        List<CitiesEntity> res = citiesService.findByTitleRu("новгор");
         listCities(res);
     }
     private static void listCities(List<CitiesEntity> all) {
         System.out.println("");
-        System.out.println("Listing contacts without details: ");
+        System.out.println("Listing cities: ");
         for (CitiesEntity contact : all) {
             System.out.println(contact);
             System.out.println();
