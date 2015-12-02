@@ -27,12 +27,12 @@ public class CitiesServiceImpl implements CitiesService {
     @Transactional(readOnly = true)
     public List<CitiesEntity> findById(int id){
         List<CitiesEntity> ret = new ArrayList<CitiesEntity>();
-        CitiesEntity res = null;
+        CitiesEntity res = new CitiesEntity();
         try {
             res = (CitiesEntity) entityManager
                     .createQuery("select c from CitiesEntity c where c.id=" + id).getSingleResult();
         } catch (NoResultException ex){
-            ex.printStackTrace();
+
         }
 
         finally {
