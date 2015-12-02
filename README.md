@@ -1,14 +1,11 @@
-Rest Api for geo database rev 1.1
+### Rest Api for geo database rev 1.1
 
-spring
-
--hibernate search
-
--nibernate-orm
-
--jpa-2.1
+* spring
+* hibernate search
+* hibernate-orm
+* jpa-2.1
 
 
-rebiuld index - mvn exec:java
+_Rebiuld index_ - mvn exec:java
 
-run local copy - mvn jetty:run
+_Run local copy_ - mvn jetty:run
