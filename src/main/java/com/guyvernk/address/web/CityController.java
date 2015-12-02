@@ -41,11 +41,11 @@ public class CityController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public Callable<CitiesEntity> findById(@PathVariable final int id) {
-        return new Callable<CitiesEntity>() {
+    public Callable<Cities> findById(@PathVariable final int id) {
+        return new Callable<Cities>() {
             @Override
-            public CitiesEntity call() throws Exception {
-                return citiesData.findById(id);
+            public Cities call() throws Exception {
+                return new Cities(citiesData.findById(id));
             }
         };
     }

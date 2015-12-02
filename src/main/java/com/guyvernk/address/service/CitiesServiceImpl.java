@@ -28,7 +28,7 @@ public class CitiesServiceImpl implements CitiesService {
 
         CitiesEntity res =  (CitiesEntity) entityManager
                 .createQuery("select c from CitiesEntity c where c.id=" + id).getSingleResult();
-        List<CitiesEntity> ret = new ArrayList<>();
+        List<CitiesEntity> ret = new ArrayList<CitiesEntity>();
         ret.add(res);
         return ret;
     }
