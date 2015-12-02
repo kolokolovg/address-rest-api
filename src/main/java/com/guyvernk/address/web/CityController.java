@@ -21,7 +21,7 @@ public class CityController {
         return new Callable<Cities>() {
             @Override
             public Cities call() throws Exception {
-                return new Cities(citiesData.findByTitleRu(name));
+                return new Cities(citiesData.findByTitleTop5(name));
             }
         };
     }
@@ -34,9 +34,9 @@ public class CityController {
             @Override
             public Cities call() throws Exception {
                 if (size > 15) {
-                    return new Cities(citiesData.findByNameLimited(name, 15));
+                    return new Cities(citiesData.findByTitleLimited(name, 15));
                 } else
-                    return new Cities(citiesData.findByNameLimited(name, size));
+                    return new Cities(citiesData.findByTitleLimited(name, size));
             }
         };
 

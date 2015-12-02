@@ -14,7 +14,7 @@ public class CitiSearchTest {
         ctx.refresh();
 
         CitiesService citiesService = ctx.getBean("citiesData",CitiesService.class);
-        List<CitiesEntity> res = citiesService.findByTitleRu("новгор");
+        List<CitiesEntity> res = citiesService.findByTitleTop5("новгор");
         listCities(res);
     }
     private static void listCities(List<CitiesEntity> all) {

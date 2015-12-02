@@ -27,8 +27,6 @@ import javax.persistence.*;
 @Indexed
 @Entity
 @Table(name = "_cities", schema = "geodata")
-//@NamedQuery(name = "CitiesEntity.findByNameLimited",
-//        query = "select * from _cities c where c.titleRU like %?1% limit ?2")
 public class CitiesEntity {
     private int cityId;
     private int countryId;

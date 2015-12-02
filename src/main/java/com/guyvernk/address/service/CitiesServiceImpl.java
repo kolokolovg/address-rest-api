@@ -25,36 +25,38 @@ public class CitiesServiceImpl implements CitiesService {
     @Transactional(readOnly = true)
     public CitiesEntity findById(int id) {
 
-        return null;
+        return (CitiesEntity) entityManager
+                .createQuery("select c from CitiesEntity c where c.id=" + id).getSingleResult();
     }
 
     @Transactional(readOnly = true)
-    public List<CitiesEntity>findByTitleRu(String titleRu) {
-       FullTextEntityManager fullTextEntityManager =
+    public List<CitiesEntity> findByTitleTop5(String titleRu) {
+        List<CitiesEntity> result = findByTitleLimited(titleRu, 5);
+        return result;
+    }
+    @Transactional(readOnly = true)
+    public List<CitiesEntity> findByTitleLimited(String titleRU, int size) {
+        FullTextEntityManager fullTextEntityManager =
                 org.hibernate.search.jpa.Search.getFullTextEntityManager(entityManager);
         QueryBuilder queryBuilder =
                 fullTextEntityManager.getSearchFactory().buildQueryBuilder()
-                .forEntity(CitiesEntity.class).get();
-        org.apache.lucene.search.Query query=
+                                     .forEntity(CitiesEntity.class).get();
+        org.apache.lucene.search.Query query =
                 queryBuilder
-                .keyword()
-                .wildcard()
-                .onField("title")
-                .matching(titleRu+"*")
-                .createQuery();
+                        .keyword()
+                        .wildcard()
+                        .onField("title")
+                        .matching(titleRU + "*")
+                        .createQuery();
         org.hibernate.search.jpa.FullTextQuery jpaQuery =
-                fullTextEntityManager.createFullTextQuery(query,CitiesEntity.class);
+                fullTextEntityManager.createFullTextQuery(query, CitiesEntity.class);
+        if (size > 0 && size < 15) {
+            jpaQuery.setMaxResults(size);
+        } else {
+            jpaQuery.setMaxResults(5);
+        }
+
         List<CitiesEntity> result = jpaQuery.getResultList();
-        return  result;
-    }
-
-    @Transactional(readOnly = true)
-    public List<CitiesEntity> findByName(String titleRu) {
-        return null;
-    }
-
-    @Transactional(readOnly = true)
-    public List<CitiesEntity> findByNameLimited(String titleRU, int size) {
-        return null;
+        return result;
     }
 }
