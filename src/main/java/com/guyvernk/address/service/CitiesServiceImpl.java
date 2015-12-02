@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,13 +25,17 @@ public class CitiesServiceImpl implements CitiesService {
 
 
     @Transactional(readOnly = true)
-    public List<CitiesEntity> findById(int id) {
+    public List<CitiesEntity> findById(int id){
         List<CitiesEntity> ret = new ArrayList<CitiesEntity>();
         CitiesEntity res = null;
         try {
             res = (CitiesEntity) entityManager
                     .createQuery("select c from CitiesEntity c where c.id=" + id).getSingleResult();
-        } finally {
+        } catch (NoResultException ex){
+            ex.printStackTrace();
+        }
+
+        finally {
             ret.add(res);
         }
         return ret;
