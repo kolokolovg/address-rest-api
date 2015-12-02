@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service("citiesData")
@@ -23,10 +24,13 @@ public class CitiesServiceImpl implements CitiesService {
 
 
     @Transactional(readOnly = true)
-    public CitiesEntity findById(int id) {
+    public List<CitiesEntity> findById(int id) {
 
-        return (CitiesEntity) entityManager
+        CitiesEntity res =  (CitiesEntity) entityManager
                 .createQuery("select c from CitiesEntity c where c.id=" + id).getSingleResult();
+        List<CitiesEntity> ret = new ArrayList<>();
+        ret.add(res);
+        return ret;
     }
 
     @Transactional(readOnly = true)
