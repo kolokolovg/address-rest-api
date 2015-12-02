@@ -26,7 +26,7 @@ public class CitiesServiceImpl implements CitiesService {
 
     @Transactional(readOnly = true)
     public List<CitiesEntity> findById(int id){
-        List<CitiesEntity> ret = new ArrayList<CitiesEntity>();
+        List<CitiesEntity> ret = new ArrayList<>();
         CitiesEntity res = new CitiesEntity();
         try {
             res = (CitiesEntity) entityManager
