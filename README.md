@@ -1,4 +1,4 @@
-### Rest Api for geo database rev 1.1
+### Rest Api for geo database rev 1.1a
 
 * spring
 * hibernate search
