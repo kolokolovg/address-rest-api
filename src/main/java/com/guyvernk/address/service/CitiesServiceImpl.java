@@ -50,7 +50,7 @@ public class CitiesServiceImpl implements CitiesService {
                         .createQuery();
         org.hibernate.search.jpa.FullTextQuery jpaQuery =
                 fullTextEntityManager.createFullTextQuery(query, CitiesEntity.class);
-        if (size > 0 && size < 15) {
+        if (size > 0 && size < 16) {
             jpaQuery.setMaxResults(size);
         } else {
             jpaQuery.setMaxResults(5);
