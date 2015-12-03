@@ -44,24 +44,29 @@
                 <th>Answer</th>
             </tr>
             <tr>
-                <td>{[/city/find/{name}],methods=[GET]}</td>
-                <td>name - строка поиска</td>
+                <td><b>/city/find/{name} method=GET</b></td>
+                <td>name - строка поиска, от 4 символов</td>
                 <td>возвращает массив CitiesEntity максимум длиной 5</td>
             </tr>
             <tr>
-                <td>{[/city/find/{name}/{size}],methods=[GET]}"</td>
-                <td>name - строка поиска,size - количество результатов(<=15)</td>
+                <td><b>/city/find/{name}/{size} method=GET</b></td>
+                <td>name - строка поиска от 4 символов, size - количество результатов до 15</td>
                 <td>возвращает массив CitiesEntity длинной size</td>
             </tr>
             <tr>
-                <td>{[/city/{id}],methods=[GET]}</td>
+                <td><b>/city/{id}] method =GET</b></td>
                 <td>id - id города</td>
                 <td>возвращает массив CitiesEntity</td>
             </tr>
             <tr>
                 <td>{[/country/{id}],methods=[GET]}</td>
                 <td>id - id страны</td>
-                <td>возвращает CountriesEntity</td>
+                <td>возвращает массив CountriesEntity</td>
+            </tr>
+            <tr>
+                <td><b>/county/find/{name}] method =GET</b></td>
+                <td>name - строка поиска</td>
+                <td>возвращает массив CountriesEntity</td>
             </tr>
         </table>
             </div>

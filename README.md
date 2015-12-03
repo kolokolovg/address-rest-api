@@ -6,6 +6,6 @@
 * jpa-2.1
 
 
-_Rebiuld index_ - mvn exec:java
+_Rebiuld index_ - mvn clean; mvn compile; mvn exec:java
 
 _Run local copy_ - mvn jetty:run
