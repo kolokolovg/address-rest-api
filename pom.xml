@@ -6,7 +6,7 @@
 
   <groupId>com.guyvernk</groupId>
   <artifactId>address-rest-api</artifactId>
-  <version>1.0-fixed</version>
+  <version>1.1.a</version>
   <properties>
     <spring.version>4.2.3.RELEASE</spring.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
