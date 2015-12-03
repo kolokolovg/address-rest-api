@@ -17,7 +17,7 @@ import javax.persistence.*;
                 @TokenFilterDef(factory = LowerCaseFilterFactory.class),
                 @TokenFilterDef(factory = StopFilterFactory.class,params = {
                         @org.hibernate.search.annotations.Parameter(name = "ignoreCase", value = "true") }) })
-@Analyzer(definition = "countytokenanalyzer")
+@Analyzer(definition = "countrytokenanalyzer")
 @Indexed
 @Entity
 @Table(name = "_countries", schema = "geodata")

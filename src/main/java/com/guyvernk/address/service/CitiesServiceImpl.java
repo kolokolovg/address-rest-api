@@ -13,6 +13,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Service("citiesData")
@@ -25,9 +26,9 @@ public class CitiesServiceImpl implements CitiesService {
 
 
     @Transactional(readOnly = true)
-    public List<CitiesEntity> findById(int id){
+    public List<CitiesEntity> findById(int id) {
         return (List<CitiesEntity>) entityManager
-                    .createQuery("select c from CitiesEntity c where c.id=" + id).getResultList();
+                .createQuery("select c from CitiesEntity c where c.id=" + id).getResultList();
 
     }
 
@@ -36,29 +37,34 @@ public class CitiesServiceImpl implements CitiesService {
         List<CitiesEntity> result = findByTitleLimited(titleRu, 5);
         return result;
     }
+
     @Transactional(readOnly = true)
     public List<CitiesEntity> findByTitleLimited(String titleRU, int size) {
-        FullTextEntityManager fullTextEntityManager =
-                org.hibernate.search.jpa.Search.getFullTextEntityManager(entityManager);
-        QueryBuilder queryBuilder =
-                fullTextEntityManager.getSearchFactory().buildQueryBuilder()
-                                     .forEntity(CitiesEntity.class).get();
-        org.apache.lucene.search.Query query =
-                queryBuilder
-                        .keyword()
-                        .wildcard()
-                        .onField("title")
-                        .matching(titleRU + "*")
-                        .createQuery();
-        org.hibernate.search.jpa.FullTextQuery jpaQuery =
-                fullTextEntityManager.createFullTextQuery(query, CitiesEntity.class);
-        if (size > 0 && size < 16) {
-            jpaQuery.setMaxResults(size);
-        } else {
-            jpaQuery.setMaxResults(5);
-        }
+        if (titleRU.length() > 3) {
+            FullTextEntityManager fullTextEntityManager =
+                    org.hibernate.search.jpa.Search.getFullTextEntityManager(entityManager);
+            QueryBuilder queryBuilder =
+                    fullTextEntityManager.getSearchFactory().buildQueryBuilder()
+                                         .forEntity(CitiesEntity.class).get();
+            org.apache.lucene.search.Query query =
+                    queryBuilder
+                            .keyword()
+                            .wildcard()
+                            .onField("title")
+                            .matching(titleRU + "*")
+                            .createQuery();
+            org.hibernate.search.jpa.FullTextQuery jpaQuery =
+                    fullTextEntityManager.createFullTextQuery(query, CitiesEntity.class);
+            if (size > 0 && size < 16) {
+                jpaQuery.setMaxResults(size);
+            } else {
+                jpaQuery.setMaxResults(5);
+            }
 
-        List<CitiesEntity> result = jpaQuery.getResultList();
-        return result;
+            List<CitiesEntity> result = jpaQuery.getResultList();
+            return result;
+        } else {
+            return Collections.emptyList();
+        }
     }
 }
