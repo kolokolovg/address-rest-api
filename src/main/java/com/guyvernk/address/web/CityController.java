@@ -1,7 +1,5 @@
 package com.guyvernk.address.web;
 
-import com.guyvernk.address.model.Cities;
-import com.guyvernk.address.model.CitiesEntity;
 import com.guyvernk.address.service.CitiesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

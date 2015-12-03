@@ -17,13 +17,13 @@ import org.hibernate.search.annotations.TokenizerDef;
 
 import javax.persistence.*;
 
-@AnalyzerDef(name = "searchtokenanalyzer",tokenizer = @TokenizerDef(factory = StandardTokenizerFactory.class),
+@AnalyzerDef(name = "citytokenanalyzer",tokenizer = @TokenizerDef(factory = StandardTokenizerFactory.class),
         filters = {
                 @TokenFilterDef(factory = StandardFilterFactory.class),
                 @TokenFilterDef(factory = LowerCaseFilterFactory.class),
                 @TokenFilterDef(factory = StopFilterFactory.class,params = {
                         @Parameter(name = "ignoreCase", value = "true") }) })
-@Analyzer(definition = "searchtokenanalyzer")
+@Analyzer(definition = "citytokenanalyzer")
 @Indexed
 @Entity
 @Table(name = "_cities", schema = "geodata")

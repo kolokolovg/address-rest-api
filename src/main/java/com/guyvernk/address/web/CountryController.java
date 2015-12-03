@@ -18,14 +18,26 @@ public class CountryController {
     @Autowired
     private CountryService countryData;
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/find/{name}",method =RequestMethod.GET)
     @ResponseBody
-    public Callable<CountriesEntity> findById(@PathVariable final int id){
-        return new Callable<CountriesEntity>() {
+    public Callable<Countries> findByName(@PathVariable final String name){
+        return new Callable<Countries>() {
             @Override
-            public CountriesEntity call() throws Exception {
-                return countryData.findById(id);
+            public Countries call() throws Exception {
+                return new Countries(countryData.findByName(name));
             }
         };
     }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public Callable<Countries> findById(@PathVariable final int id){
+        return new Callable<Countries>() {
+            @Override
+            public Countries call() throws Exception {
+                return new Countries(countryData.findById(id));
+            }
+        };
+    }
+
 }

@@ -1,4 +1,4 @@
-package com.guyvernk.address.model;
+package com.guyvernk.address.web;
 
 import com.guyvernk.address.model.CitiesEntity;
 
