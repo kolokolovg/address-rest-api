@@ -59,7 +59,7 @@
                 <td>возвращает массив CitiesEntity</td>
             </tr>
             <tr>
-                <td>{[/country/{id}],methods=[GET]}</td>
+                <td><b>/country/{id} method=GET</b></td>
                 <td>id - id страны</td>
                 <td>возвращает массив CountriesEntity</td>
             </tr>
